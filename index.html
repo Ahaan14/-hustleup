@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HustleUp — Apply to Join</title>
+<!-- GOOGLE ANALYTICS: replace G-XXXXXXXXXX with your Measurement ID -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --off-black: #111111;
+    --panel: #161616;
+    --border: #242424;
+    --border-light: #2e2e2e;
+    --text: #f0ede8;
+    --muted: #6b6b6b;
+    --muted2: #4a4a4a;
+    --accent: #e8ff47;
+    --accent-dim: rgba(232, 255, 71, 0.1);
+    --accent-dim2: rgba(232, 255, 71, 0.06);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 0 40px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(20px);
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    color: var(--text);
+  }
+
+  .logo span { color: var(--accent); }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .nav-pill {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    padding: 6px 14px;
+    border-radius: 100px;
+  }
+
+  .nav-stat {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .nav-stat strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 64px;
+  }
+
+  .hero-left {
+    padding: 80px 60px 80px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 10%;
+    bottom: 10%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--border) 30%, var(--border) 70%, transparent);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent-dim2);
+    border: 1px solid rgba(232,255,71,0.2);
+    padding: 7px 14px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    width: fit-content;
+    margin-bottom: 36px;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  .hero-h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(44px, 5vw, 68px);
+    line-height: 1.0;
+    letter-spacing: -2px;
+    color: var(--text);
+    margin-bottom: 28px;
+  }
+
+  .hero-h1 em {
+    font-style: normal;
+    color: var(--accent);
+    position: relative;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #8a8a8a;
+    max-width: 420px;
+    margin-bottom: 48px;
+    font-weight: 300;
+  }
+
+  .stats-row {
+    display: flex;
+    gap: 40px;
+  }
+
+  .stat-item {}
+
+  .stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -1px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+    letter-spacing: 0.04em;
+  }
+
+  /* FORM PANEL */
+  .hero-right {
+    padding: 60px 80px 60px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .form-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .form-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+
+  .form-header {
+    margin-bottom: 32px;
+  }
+
+  .form-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+  }
+
+  .form-sub {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 14px;
+  }
+
+  .form-group.half { margin-bottom: 0; }
+
+  label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  input, select, textarea {
+    background: var(--off-black);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 11px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+
+  input::placeholder, textarea::placeholder { color: var(--muted2); }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: rgba(232,255,71,0.4);
+    box-shadow: 0 0 0 3px rgba(232,255,71,0.06);
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6b6b' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    cursor: pointer;
+  }
+
+  select option { background: var(--off-black); }
+
+  textarea { resize: none; line-height: 1.6; }
+
+  .availability-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .avail-btn {
+    background: var(--off-black);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--muted);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+  }
+
+  .avail-btn:hover { border-color: var(--border-light); color: var(--text); }
+  .avail-btn.active { background: var(--accent-dim); border-color: rgba(232,255,71,0.4); color: var(--accent); }
+
+  .cv-upload {
+    background: var(--off-black);
+    border: 1px dashed var(--border-light);
+    border-radius: 8px;
+    padding: 14px 16px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--muted);
+    transition: border-color 0.2s, color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .cv-upload:hover { border-color: rgba(232,255,71,0.4); color: var(--text); }
+  .cv-upload.has-file { border-color: rgba(232,255,71,0.4); color: var(--accent); background: var(--accent-dim2); }
+
+  .skills-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .skill-btn {
+    background: var(--off-black);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 7px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+
+  .skill-btn:hover { border-color: var(--border-light); color: var(--text); }
+  .skill-btn.active { background: var(--accent-dim); border-color: rgba(232,255,71,0.4); color: var(--accent); }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 20px 0;
+  }
+
+  .submit-btn {
+    width: 100%;
+    background: var(--accent);
+    color: var(--black);
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .submit-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255,255,255,0);
+    transition: background 0.2s;
+  }
+
+  .submit-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(232,255,71,0.25); }
+  .submit-btn:hover::after { background: rgba(255,255,255,0.1); }
+  .submit-btn:active { transform: translateY(0); }
+
+  .form-note {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 14px;
+    line-height: 1.6;
+  }
+
+  /* HOW IT WORKS */
+  .section {
+    padding: 100px 80px;
+    position: relative;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.05;
+    margin-bottom: 60px;
+    max-width: 600px;
+  }
+
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .step {
+    background: var(--panel);
+    padding: 36px 28px;
+    position: relative;
+  }
+
+  .step-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--muted2);
+    margin-bottom: 20px;
+  }
+
+  .step-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .step-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -0.3px;
+  }
+
+  .step-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* WHAT YOU GET */
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .benefit {
+    background: var(--panel);
+    padding: 36px 36px;
+    border: none;
+  }
+
+  .benefit-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(232,255,71,0.15);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-bottom: 18px;
+  }
+
+  .benefit-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+
+  .benefit-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* WHO FITS */
+  .who-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .who-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    transition: border-color 0.2s;
+  }
+
+  .who-card:hover { border-color: var(--border-light); }
+
+  .who-emoji { font-size: 32px; margin-bottom: 14px; display: block; }
+
+  .who-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.3px;
+  }
+
+  .who-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* QUOTE BAR */
+  .quote-bar {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 28px 80px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    overflow: hidden;
+    background: var(--panel);
+  }
+
+  .quote-scroll {
+    display: flex;
+    gap: 60px;
+    animation: scroll 25s linear infinite;
+    white-space: nowrap;
+  }
+
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .quote-item {
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .quote-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 48px 80px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.5px;
+  }
+
+  .footer-logo span { color: var(--accent); }
+
+  .footer-note {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  /* SUCCESS */
+  .success-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,10,0.95);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(20px);
+  }
+
+  .success-overlay.show { display: flex; }
+
+  .success-card {
+    text-align: center;
+    max-width: 460px;
+    padding: 60px 40px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.5s ease;
+  }
+
+  .success-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .success-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(232,255,71,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 24px;
+  }
+
+  .success-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+  }
+
+  .success-sub {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 32px;
+    font-weight: 300;
+  }
+
+  .success-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: -1px;
+  }
+
+  .success-num-label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .nav-stat { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 60px 24px 40px; }
+    .hero-left::after { display: none; }
+    .hero-right { padding: 0 24px 60px; }
+    .form-card { padding: 28px 20px; }
+    .section { padding: 60px 24px; }
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .benefits-grid { grid-template-columns: 1fr; }
+    .who-grid { grid-template-columns: 1fr; }
+    .quote-bar { padding: 20px 24px; }
+    footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    .steps-grid { grid-template-columns: 1fr; }
+    .availability-grid { grid-template-columns: repeat(2, 1fr); }
+    .stats-row { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Hustle<span>Up</span></div>
+  <div class="nav-right">
+    <div class="nav-stat">Applications open · <strong>Cohort 02</strong></div>
+    <div class="nav-pill">For Talent</div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="badge">
+      <div class="badge-dot"></div>
+      Now Accepting Applications
+    </div>
+    <h1 class="hero-h1">Work on<br>real startup<br><em>problems.</em></h1>
+    <p class="hero-sub">HustleUp places vetted students and professionals on high-impact, short-term projects with funded startups. Build a portfolio that actually means something.</p>
+    <div class="stats-row">
+      <div class="stat-item">
+        <div class="stat-num">40+</div>
+        <div class="stat-label">Startups on platform</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">₹15K</div>
+        <div class="stat-label">Avg. project payout</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">3–6 wk</div>
+        <div class="stat-label">Typical project length</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="form-card">
+      <div class="form-header">
+        <div class="form-title">Apply to Join</div>
+        <div class="form-sub">We review every application. Accepted members get matched to live projects within 2 weeks.</div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group half">
+          <label>Full Name</label>
+          <input type="text" id="name" placeholder="Arjun Mehta" />
+        </div>
+        <div class="form-group half">
+          <label>WhatsApp Number</label>
+          <input type="tel" id="phone" placeholder="+91 98765 43210" />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" id="email" placeholder="arjun@university.edu" />
+      </div>
+
+      <div class="form-row">
+        <div class="form-group half">
+          <label>University / College</label>
+          <input type="text" id="university" placeholder="Plaksha University" />
+        </div>
+        <div class="form-group half">
+          <label>Year of Study</label>
+          <select id="year">
+            <option value="" disabled selected>Select year</option>
+            <option>1st Year</option>
+            <option>2nd Year</option>
+            <option>3rd Year</option>
+            <option>4th Year</option>
+            <option>Graduated / Professional</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group half">
+          <label>Primary Domain</label>
+          <select id="domain">
+            <option value="" disabled selected>Select domain</option>
+            <option>Web Development</option>
+            <option>Product Design / UI-UX</option>
+            <option>Marketing &amp; Growth</option>
+            <option>Business Strategy</option>
+            <option>Finance &amp; Accounting</option>
+            <option>Content &amp; Copywriting</option>
+            <option>Data &amp; Analytics</option>
+            <option>Operations</option>
+            <option>Legal</option>
+          </select>
+        </div>
+        <div class="form-group half">
+          <label>Secondary Skill <span style="color:var(--muted2)">(optional)</span></label>
+          <select id="secondary">
+            <option value="None" selected>None</option>
+            <option>Web Development</option>
+            <option>Product Design / UI-UX</option>
+            <option>Marketing &amp; Growth</option>
+            <option>Business Strategy</option>
+            <option>Finance &amp; Accounting</option>
+            <option>Content &amp; Copywriting</option>
+            <option>Data &amp; Analytics</option>
+            <option>Operations</option>
+            <option>Legal</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Weekly Availability</label>
+        <div class="availability-grid">
+          <button class="avail-btn" onclick="selectAvail(this)">5–8 hrs/week</button>
+          <button class="avail-btn" onclick="selectAvail(this)">8–12 hrs/week</button>
+          <button class="avail-btn" onclick="selectAvail(this)">12–20 hrs/week</button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Portfolio / LinkedIn</label>
+        <input type="text" id="portfolio" placeholder="https://linkedin.com/in/you or behance.net/yourwork" />
+      </div>
+
+      <div class="form-group">
+        <label>Upload CV <span style="color:var(--muted2)">(PDF only)</span></label>
+        <div class="cv-upload" id="cvUpload" onclick="document.getElementById('cvFile').click()">
+          <input type="file" id="cvFile" accept=".pdf" style="display:none" onchange="handleCVSelect(this)" />
+          <span id="cvLabel">📎 &nbsp;Click to upload your CV</span>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="form-group">
+        <label>Why do you want to work with startups? <span style="color:var(--muted2)">(2–3 lines)</span></label>
+        <textarea id="why" rows="3" placeholder="What draws you to early-stage companies? What kind of problems excite you?"></textarea>
+      </div>
+
+      <button class="submit-btn" onclick="handleSubmit()">Submit Application →</button>
+      <div class="form-note">Applications are reviewed within 48 hours. We're selective — and that's the point.</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE MARQUEE -->
+<div class="quote-bar">
+  <div class="quote-scroll" id="marquee">
+    <span class="quote-item"><span class="quote-dot"></span>Real projects. Real impact.</span>
+    <span class="quote-item"><span class="quote-dot"></span>Not just an internship — a verified track record</span>
+    <span class="quote-item"><span class="quote-dot"></span>Paid work from day one</span>
+    <span class="quote-item"><span class="quote-dot"></span>We handle the matching, coordination, and payments</span>
+    <span class="quote-item"><span class="quote-dot"></span>Projects in design, tech, strategy, and more</span>
+    <span class="quote-item"><span class="quote-dot"></span>Work with startups across India</span>
+    <!-- duplicate -->
+    <span class="quote-item"><span class="quote-dot"></span>Real projects. Real impact.</span>
+    <span class="quote-item"><span class="quote-dot"></span>Not just an internship — a verified track record</span>
+    <span class="quote-item"><span class="quote-dot"></span>Paid work from day one</span>
+    <span class="quote-item"><span class="quote-dot"></span>We handle the matching, coordination, and payments</span>
+    <span class="quote-item"><span class="quote-dot"></span>Projects in design, tech, strategy, and more</span>
+    <span class="quote-item"><span class="quote-dot"></span>Work with startups across India</span>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <div class="section-label">The Process</div>
+  <h2 class="section-title">From application to paid project in 2 weeks.</h2>
+  <div class="steps-grid">
+    <div class="step">
+      <div class="step-num">01</div>
+      <span class="step-icon">📋</span>
+      <div class="step-title">Apply</div>
+      <div class="step-desc">Submit your profile, skills, and a short note on what drives you. We review every application manually.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <span class="step-icon">✅</span>
+      <div class="step-title">Get Vetted</div>
+      <div class="step-desc">A quick 20-min conversation with our team. We assess quality, reliability, and fit — not just your CV.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <span class="step-icon">🎯</span>
+      <div class="step-title">Get Matched</div>
+      <div class="step-desc">We match you to an active startup project based on your skills and availability. No cold pitching.</div>
+    </div>
+    <div class="step">
+      <div class="step-num">04</div>
+      <span class="step-icon">🚀</span>
+      <div class="step-title">Execute & Get Paid</div>
+      <div class="step-desc">Deliver with our support. Weekly check-ins, clear briefs, and payment on delivery via escrow.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section class="section" style="padding-top: 0; border-top: none;">
+  <div class="section-label">Why HustleUp</div>
+  <h2 class="section-title">Built differently from any internship you've done.</h2>
+  <div class="benefits-grid">
+    <div class="benefit">
+      <div class="benefit-icon">💼</div>
+      <div class="benefit-title">Verified Work Portfolio</div>
+      <div class="benefit-desc">Every project you complete on HustleUp is verified and lives on your public profile. Recruiters and future clients can see exactly what you built and what the startup said about your work.</div>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon">₹</div>
+      <div class="benefit-title">Real Pay, Not Stipends</div>
+      <div class="benefit-desc">Projects on HustleUp pay ₹8,000–₹40,000 for 3–6 week engagements. You're hired for your skills, not to get someone coffee.</div>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon">🛡️</div>
+      <div class="benefit-title">We Handle Everything</div>
+      <div class="benefit-desc">Contracts, payments, briefs, timelines — our coordinators manage the operational layer so you can focus entirely on the work.</div>
+    </div>
+    <div class="benefit">
+      <div class="benefit-icon">🌐</div>
+      <div class="benefit-title">Startup Network Access</div>
+      <div class="benefit-desc">Work with funded, fast-growing startups across India. Many HustleUp projects turn into longer engagements or full-time opportunities.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO FITS -->
+<section class="section" style="padding-top: 0; border-top: none;">
+  <div class="section-label">Who We're Looking For</div>
+  <h2 class="section-title">You're a fit if you're any of these.</h2>
+  <div class="who-grid">
+    <div class="who-card">
+      <span class="who-emoji">🎓</span>
+      <div class="who-title">University Students</div>
+      <div class="who-desc">2nd year onwards. Strong in at least one domain — design, code, marketing, finance, or strategy. Hungry to work on things that matter.</div>
+    </div>
+    <div class="who-card">
+      <span class="who-emoji">💡</span>
+      <div class="who-title">Recent Graduates</div>
+      <div class="who-desc">In a full-time job but want more. HustleUp projects fit around your schedule — 8–15 hours a week, remote, with clear scope.</div>
+    </div>
+    <div class="who-card">
+      <span class="who-emoji">⚡</span>
+      <div class="who-title">Domain Specialists</div>
+      <div class="who-desc">Deep expertise in law, finance, growth, or operations. Startups need people who can hit the ground running — not generalists.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Hustle<span>Up</span></div>
+  <div class="footer-note">© 2024 HustleUp. Managed talent for startups.</div>
+</footer>
+
+<!-- SUCCESS -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-card">
+    <div class="success-icon">✓</div>
+    <div class="success-title">Application Received</div>
+    <div class="success-sub">You're in the queue. Our team reviews applications every 48 hours — expect a message on WhatsApp if you're selected for a screening call.</div>
+    <div class="success-num" id="successNum">—</div>
+    <div class="success-num-label">Your application number</div>
+  </div>
+</div>
+
+<script>
+  // Skill selection (multi)
+  function toggleSkill(btn) {
+    btn.classList.toggle('active');
+  }
+
+  // Availability (single)
+  function selectAvail(btn) {
+    document.querySelectorAll('.avail-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  // -------------------------------------------------------
+  // AIRTABLE CONFIG — paste your values here
+  // -------------------------------------------------------
+  const AIRTABLE_TOKEN = 'pat08VGTZuhCpwRmj.19a3db71c8737387ad2931fc69fa967d2c2e9aeba5200106a4b95bcc34663144';
+  const AIRTABLE_BASE_ID = 'app7PCQNS5sjSwYuo';
+  const AIRTABLE_TABLE = 'Applications';
+  // -------------------------------------------------------
+
+  function handleCVSelect(input) {
+    const label = document.getElementById('cvLabel');
+    const box = document.getElementById('cvUpload');
+    if (input.files && input.files[0]) {
+      label.textContent = '✓  ' + input.files[0].name;
+      box.classList.add('has-file');
+    }
+  }
+
+  function shakeButton() {
+    const btn = document.querySelector('.submit-btn');
+    btn.style.transform = 'translateX(-6px)';
+    setTimeout(() => btn.style.transform = 'translateX(6px)', 80);
+    setTimeout(() => btn.style.transform = 'translateX(-4px)', 160);
+    setTimeout(() => btn.style.transform = 'translateX(0)', 240);
+  }
+
+  function highlightMissing(ids) {
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && !el.value.trim()) {
+        el.style.borderColor = 'rgba(255, 80, 80, 0.5)';
+        el.style.boxShadow = '0 0 0 3px rgba(255,80,80,0.08)';
+        el.addEventListener('input', () => {
+          el.style.borderColor = '';
+          el.style.boxShadow = '';
+        }, { once: true });
+      }
+    });
+  }
+
+  async function handleSubmit() {
+    const name       = document.getElementById('name').value.trim();
+    const phone      = document.getElementById('phone').value.trim();
+    const email      = document.getElementById('email').value.trim();
+    const university = document.getElementById('university').value.trim();
+    const year       = document.getElementById('year').value;
+    const portfolio  = document.getElementById('portfolio').value.trim();
+    const why        = document.getElementById('why').value.trim();
+
+    const domain = document.getElementById('domain').value;
+    const secondary = document.getElementById('secondary').value;
+    const skills = domain; // kept for compatibility
+
+    // Collect availability
+    const availability = document.querySelector('.avail-btn.active')?.textContent || '';
+
+    // Validate required fields
+    if (!name || !phone || !email || !university || !domain) {
+      shakeButton();
+      highlightMissing(['name', 'phone', 'email', 'university', 'domain']);
+      return;
+    }
+
+    // Disable button while submitting
+    const btn = document.querySelector('.submit-btn');
+    btn.textContent = 'Submitting…';
+    btn.style.opacity = '0.7';
+    btn.style.pointerEvents = 'none';
+
+    // Generate app number
+    const appNum = 'HU-' + (Math.floor(Math.random() * 400) + 180);
+
+    try {
+      const response = await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE)}`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          fields: {
+            'Name':         name,
+            'Phone':        phone,
+            'Email':        email,
+            'University':   university,
+            'Year':         year,
+            'Primary Domain': domain,
+            'Secondary Skill': secondary,
+            'Availability': availability,
+            'Portfolio':    portfolio,
+            'Why':          why,
+            'CV':           document.getElementById('cvFile').files[0]?.name || 'Not uploaded',
+            'App Number':   appNum,
+            'Applied At':   new Date().toISOString(),
+            'Status':       'New'
+          }
+        })
+      });
+
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.error?.message || 'Airtable error');
+      }
+
+      // Track conversion in Google Analytics (if loaded)
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'form_submit', { event_category: 'Application', event_label: 'Student Onboarding' });
+      }
+
+      // Show success
+      document.getElementById('successNum').textContent = appNum;
+      document.getElementById('successOverlay').classList.add('show');
+
+    } catch (err) {
+      console.error('Submission error:', err);
+      btn.textContent = 'Something went wrong — try again';
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'auto';
+      btn.style.background = 'rgba(255,80,80,0.15)';
+      btn.style.color = '#ff6b6b';
+      btn.style.border = '1px solid rgba(255,80,80,0.3)';
+    }
+  }
+</script>
+
+</body>
+</html>
