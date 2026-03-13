@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HustleUp — For Founders</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --off-black: #111111;
+    --panel: #161616;
+    --border: #242424;
+    --border-light: #2e2e2e;
+    --text: #f0ede8;
+    --muted: #6b6b6b;
+    --muted2: #4a4a4a;
+    --accent: #e8ff47;
+    --accent-dim: rgba(232, 255, 71, 0.1);
+    --accent-dim2: rgba(232, 255, 71, 0.06);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    top: -200px;
+    right: -10%;
+    width: 60vw;
+    height: 60vw;
+    max-width: 800px;
+    max-height: 800px;
+    background: radial-gradient(ellipse at center, rgba(232,255,71,0.04) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 0 48px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    background: rgba(10,10,10,0.88);
+    backdrop-filter: blur(20px);
+  }
+
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+
+  .nav-right { display: flex; align-items: center; gap: 24px; }
+
+  .nav-link {
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-link:hover { color: var(--text); }
+
+  .nav-cta {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--black);
+    background: var(--accent);
+    padding: 8px 18px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 120px 48px 80px;
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .hero-inner {
+    max-width: 780px;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent-dim2);
+    border: 1px solid rgba(232,255,71,0.2);
+    padding: 7px 14px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 40px;
+  }
+
+  .badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.7); }
+  }
+
+  .hero-h1 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(48px, 6vw, 84px);
+    line-height: 1.0;
+    letter-spacing: -3px;
+    margin-bottom: 32px;
+  }
+
+  .hero-h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    line-height: 1.7;
+    color: #8a8a8a;
+    max-width: 540px;
+    margin-bottom: 52px;
+    font-weight: 300;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--black);
+    background: var(--accent);
+    padding: 14px 28px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 30px rgba(232,255,71,0.25); }
+
+  .btn-ghost {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--text); }
+
+  /* LOGOS / TRUST BAR */
+  .trust-bar {
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    background: var(--panel);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+  }
+
+  .trust-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted2);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .trust-divider { width: 1px; height: 20px; background: var(--border); flex-shrink: 0; }
+
+  .trust-items {
+    display: flex;
+    gap: 48px;
+    align-items: center;
+    animation: scrollTrust 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  @keyframes scrollTrust {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  .trust-item {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted2);
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .trust-item::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--border-light);
+  }
+
+  /* SECTIONS */
+  .section {
+    padding: 100px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+
+  .section-sub {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 60px;
+    font-weight: 300;
+  }
+
+  /* WHAT WE DO */
+  .what-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .what-card {
+    background: var(--panel);
+    padding: 40px;
+  }
+
+  .what-card-big {
+    grid-column: span 2;
+    background: var(--off-black);
+    padding: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .what-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--muted2);
+    margin-bottom: 16px;
+  }
+
+  .what-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+
+  .what-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.3px;
+    margin-bottom: 10px;
+  }
+
+  .what-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .what-big-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .what-big-title em { font-style: normal; color: var(--accent); }
+
+  .what-big-desc {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .what-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .what-stat-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--text);
+  }
+
+  .what-stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  /* HOW IT WORKS */
+  .section-border { border-top: 1px solid var(--border); }
+
+  .how-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+
+  .how-grid::before {
+    content: '';
+    position: absolute;
+    top: 28px;
+    left: calc(12.5% + 20px);
+    right: calc(12.5% + 20px);
+    height: 1px;
+    background: linear-gradient(90deg, var(--accent-dim), rgba(232,255,71,0.15), var(--accent-dim));
+    z-index: 0;
+  }
+
+  .how-step {
+    padding: 0 24px 0 0;
+    position: relative;
+    z-index: 1;
+  }
+
+  .how-num-wrap {
+    width: 56px; height: 56px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .how-num-wrap.accent-bg {
+    background: var(--accent-dim);
+    border-color: rgba(232,255,71,0.3);
+  }
+
+  .how-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--muted2);
+    letter-spacing: -0.5px;
+  }
+
+  .how-num-wrap.accent-bg .how-num { color: var(--accent); }
+
+  .how-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    letter-spacing: -0.2px;
+  }
+
+  .how-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* TALENT */
+  .talent-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .talent-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .talent-card:hover { border-color: rgba(232,255,71,0.2); transform: translateY(-2px); }
+
+  .talent-emoji { font-size: 28px; margin-bottom: 14px; display: block; }
+
+  .talent-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    letter-spacing: -0.2px;
+  }
+
+  .talent-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .talent-tag {
+    font-size: 11px;
+    color: var(--muted);
+    background: var(--off-black);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 100px;
+    letter-spacing: 0.03em;
+  }
+
+  .talent-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* FORM SECTION */
+  .form-section-wrap {
+    background: var(--panel);
+    border-top: 1px solid var(--border);
+    padding: 100px 48px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .form-section-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 10%, var(--accent) 50%, transparent 90%);
+  }
+
+  .form-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .form-left {}
+
+  .form-left-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(32px, 3.5vw, 48px);
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    line-height: 1.05;
+    margin-bottom: 20px;
+  }
+
+  .form-left-title em { font-style: normal; color: var(--accent); }
+
+  .form-left-sub {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+
+  .form-promise {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .promise-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .promise-icon {
+    width: 32px; height: 32px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(232,255,71,0.15);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .promise-text {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .promise-text strong { color: var(--text); font-weight: 500; }
+
+  /* FORM CARD */
+  .form-card {
+    background: var(--off-black);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .form-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+
+  /* FORM PROGRESS */
+  .form-progress {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+
+  .progress-step {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .progress-step::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+    margin: 0 8px;
+    transition: background 0.4s;
+  }
+
+  .progress-step:last-child::after { display: none; }
+  .progress-step.done::after { background: rgba(232,255,71,0.3); }
+
+  .progress-dot {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--off-black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--muted2);
+    font-family: 'Syne', sans-serif;
+    transition: all 0.3s;
+    flex-shrink: 0;
+  }
+
+  .progress-step.active .progress-dot {
+    border-color: var(--accent);
+    background: var(--accent-dim);
+    color: var(--accent);
+    box-shadow: 0 0 12px rgba(232,255,71,0.2);
+  }
+
+  .progress-step.done .progress-dot {
+    border-color: rgba(232,255,71,0.4);
+    background: var(--accent-dim);
+    color: var(--accent);
+  }
+
+  .progress-label {
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted2);
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color 0.3s;
+  }
+
+  .progress-step.active .progress-label { color: var(--text); }
+  .progress-step.done .progress-label { color: var(--muted); }
+
+  /* FORM ELEMENTS */
+  .form-step { display: none; }
+  .form-step.active { display: block; }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 16px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 16px;
+  }
+
+  .form-group.half { margin-bottom: 0; }
+
+  label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  input, select, textarea {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 11px 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--text);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+
+  input::placeholder, textarea::placeholder { color: var(--muted2); }
+
+  input:focus, select:focus, textarea:focus {
+    border-color: rgba(232,255,71,0.4);
+    box-shadow: 0 0 0 3px rgba(232,255,71,0.06);
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236b6b6b' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    cursor: pointer;
+  }
+
+  select option { background: var(--panel); }
+  textarea { resize: none; line-height: 1.6; }
+
+  .budget-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .budget-btn {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--muted);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+  }
+
+  .budget-btn:hover { border-color: var(--border-light); color: var(--text); }
+  .budget-btn.active { background: var(--accent-dim); border-color: rgba(232,255,71,0.4); color: var(--accent); }
+
+  .form-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .btn-back {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 11px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-back:hover { border-color: var(--border-light); color: var(--text); }
+
+  .btn-next {
+    flex: 1;
+    background: var(--panel);
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text);
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .btn-next:hover { border-color: rgba(232,255,71,0.3); background: rgba(232,255,71,0.04); }
+
+  .btn-submit {
+    flex: 1;
+    background: var(--accent);
+    border: none;
+    border-radius: 8px;
+    padding: 13px 20px;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--black);
+    cursor: pointer;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .btn-submit:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(232,255,71,0.25); }
+
+  .form-note {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 14px;
+    line-height: 1.6;
+  }
+
+  /* SUCCESS */
+  .success-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,10,10,0.95);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(20px);
+  }
+
+  .success-overlay.show { display: flex; }
+
+  .success-card {
+    text-align: center;
+    max-width: 460px;
+    padding: 60px 40px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.5s ease;
+  }
+
+  .success-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .success-icon {
+    width: 64px; height: 64px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(232,255,71,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 24px;
+  }
+
+  .success-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 12px;
+  }
+
+  .success-sub {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 48px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    letter-spacing: -0.5px;
+  }
+
+  .footer-logo span { color: var(--accent); }
+  .footer-note { font-size: 12px; color: var(--muted); }
+
+  /* REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.16,1,0.3,1), transform 0.6s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-d1 { transition-delay: 0.08s; }
+  .reveal-d2 { transition-delay: 0.16s; }
+  .reveal-d3 { transition-delay: 0.24s; }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 0 20px; }
+    .hero { padding: 100px 24px 60px; }
+    .trust-bar { padding: 16px 24px; }
+    .section { padding: 60px 24px; }
+    .what-grid { grid-template-columns: 1fr; }
+    .what-card-big { grid-column: span 1; grid-template-columns: 1fr; gap: 24px; }
+    .how-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .how-grid::before { display: none; }
+    .talent-grid { grid-template-columns: 1fr; }
+    .form-section-wrap { padding: 60px 24px; }
+    .form-inner { grid-template-columns: 1fr; gap: 40px; }
+    .form-row { grid-template-columns: 1fr; }
+    .budget-grid { grid-template-columns: repeat(2, 1fr); }
+    footer { padding: 32px 24px; flex-direction: column; gap: 16px; text-align: center; }
+  }
+
+  @media (max-width: 600px) {
+    .how-grid { grid-template-columns: 1fr; }
+    .hero-h1 { letter-spacing: -2px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="logo">Hustle<span>Up</span></a>
+  <div class="nav-right">
+    <a href="/" class="nav-link">For Talent</a>
+    <a href="#post-project" class="nav-cta">Post a Project →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">
+      <div class="badge-dot"></div>
+      For Founders & Startups
+    </div>
+    <h1 class="hero-h1">Stop hiring.<br>Start <em>executing.</em></h1>
+    <p class="hero-sub">HustleUp gives you vetted, ready-to-deploy student talent for short-term projects — without the hiring overhead, bad freelancers, or intern management tax.</p>
+    <div class="hero-actions">
+      <a href="#post-project" class="btn-primary">Post a Project →</a>
+      <a href="#how-it-works" class="btn-ghost">See how it works ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <span class="trust-label">Trusted by</span>
+  <div class="trust-divider"></div>
+  <div class="trust-items">
+    <span class="trust-item">Early-stage Founders</span>
+    <span class="trust-item">Seed-funded Startups</span>
+    <span class="trust-item">Bootstrapped Companies</span>
+    <span class="trust-item">Incubator Startups</span>
+    <span class="trust-item">Product Studios</span>
+    <span class="trust-item">Early-stage Founders</span>
+    <span class="trust-item">Seed-funded Startups</span>
+    <span class="trust-item">Bootstrapped Companies</span>
+    <span class="trust-item">Incubator Startups</span>
+    <span class="trust-item">Product Studios</span>
+  </div>
+</div>
+
+<!-- WHAT WE DO -->
+<div style="border-top: 1px solid var(--border);">
+<div class="section">
+  <div class="section-label">What We Do</div>
+  <h2 class="section-title reveal">The managed talent layer<br>your startup never had.</h2>
+  <p class="section-sub reveal reveal-d1">We're not a freelance marketplace. We're the managed execution layer between your problem and a solution.</p>
+
+  <div class="what-grid">
+    <div class="what-card reveal">
+      <div class="what-num">01</div>
+      <span class="what-icon">🎯</span>
+      <div class="what-title">Vetted talent, not a lottery</div>
+      <div class="what-desc">Every person on HustleUp has been screened by our team — skills, reliability, communication. You get the top 20%, not a random applicant pool.</div>
+    </div>
+    <div class="what-card reveal reveal-d1">
+      <div class="what-num">02</div>
+      <span class="what-icon">🛡️</span>
+      <div class="what-title">We manage the execution</div>
+      <div class="what-desc">Our coordinators handle briefs, check-ins, deliverable reviews, and quality verification. You review the output, not manage the person.</div>
+    </div>
+    <div class="what-card reveal reveal-d2">
+      <div class="what-num">03</div>
+      <span class="what-icon">⚡</span>
+      <div class="what-title">Fast. 48 hours to matched.</div>
+      <div class="what-desc">Post your project today. We match you to the right person within 48 hours. Work starts within the week — not 3 weeks of back-and-forth.</div>
+    </div>
+    <div class="what-card reveal reveal-d3">
+      <div class="what-num">04</div>
+      <span class="what-icon">💸</span>
+      <div class="what-title">Startup-friendly pricing</div>
+      <div class="what-desc">Typical projects run ₹15,000–₹50,000 for 3–6 week engagements. Toptal-quality vetting at a fraction of the cost.</div>
+    </div>
+    <div class="what-card-big reveal">
+      <div>
+        <div class="what-big-title">Not Upwork.<br>Not an intern.<br><em>Something better.</em></div>
+        <div class="what-big-desc" style="margin-top:16px;">Upwork gives you a freelancer and wishes you luck. Internshala gives you a student with no accountability. HustleUp gives you vetted talent + active project management — so the work actually gets done.</div>
+      </div>
+      <div class="what-stats">
+        <div>
+          <div class="what-stat-num">40+</div>
+          <div class="what-stat-label">Active startups</div>
+        </div>
+        <div>
+          <div class="what-stat-num">48h</div>
+          <div class="what-stat-label">Avg. match time</div>
+        </div>
+        <div>
+          <div class="what-stat-num">₹15K</div>
+          <div class="what-stat-label">Avg. project cost</div>
+        </div>
+        <div>
+          <div class="what-stat-num">92%</div>
+          <div class="what-stat-label">On-time delivery</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- HOW IT WORKS -->
+<div style="border-top: 1px solid var(--border);" id="how-it-works">
+<div class="section">
+  <div class="section-label">How It Works</div>
+  <h2 class="section-title reveal">From brief to delivery<br>in under 6 weeks.</h2>
+  <p class="section-sub reveal reveal-d1">Four steps. Minimal effort from you. Maximum output.</p>
+
+  <div class="how-grid">
+    <div class="how-step reveal">
+      <div class="how-num-wrap accent-bg">
+        <span class="how-num">01</span>
+      </div>
+      <div class="how-title">Post Your Project</div>
+      <div class="how-desc">Fill out a short brief — scope, domain, budget, timeline. Takes under 5 minutes. No long forms, no calls needed upfront.</div>
+    </div>
+    <div class="how-step reveal reveal-d1">
+      <div class="how-num-wrap">
+        <span class="how-num">02</span>
+      </div>
+      <div class="how-title">We Match You</div>
+      <div class="how-desc">Our team reviews your brief and handpicks the best-fit talent from our vetted pool. You get a profile and intro within 48 hours.</div>
+    </div>
+    <div class="how-step reveal reveal-d2">
+      <div class="how-num-wrap">
+        <span class="how-num">03</span>
+      </div>
+      <div class="how-title">Work Begins</div>
+      <div class="how-desc">Once you approve, we kick off the project. Weekly check-ins, clear milestones, and a dedicated coordinator handling all the back-and-forth.</div>
+    </div>
+    <div class="how-step reveal reveal-d3">
+      <div class="how-num-wrap">
+        <span class="how-num">04</span>
+      </div>
+      <div class="how-title">Review & Pay</div>
+      <div class="how-desc">Deliverables go through our quality check before reaching you. Payment is held in escrow and released only on your approval.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- WHO THE TALENT IS -->
+<div style="border-top: 1px solid var(--border);">
+<div class="section">
+  <div class="section-label">The Talent</div>
+  <h2 class="section-title reveal">Sharp, hungry, and<br>closer than you think.</h2>
+  <p class="section-sub reveal reveal-d1">Our talent pool is built from India's top universities — screened for skill, work ethic, and startup orientation.</p>
+
+  <div class="talent-grid">
+    <div class="talent-card reveal">
+      <span class="talent-emoji">💻</span>
+      <div class="talent-title">Tech Builders</div>
+      <div class="talent-desc">Full-stack developers, mobile engineers, ML practitioners, and DevOps specialists who can ship, not just code.</div>
+      <div class="talent-tags">
+        <span class="talent-tag">Web Dev</span>
+        <span class="talent-tag">Mobile</span>
+        <span class="talent-tag">AI / ML</span>
+        <span class="talent-tag">DevOps</span>
+      </div>
+    </div>
+    <div class="talent-card reveal reveal-d1">
+      <span class="talent-emoji">🎨</span>
+      <div class="talent-title">Designers & Creatives</div>
+      <div class="talent-desc">Product designers, UX researchers, and content creators who understand startup constraints and move fast.</div>
+      <div class="talent-tags">
+        <span class="talent-tag">Product Design</span>
+        <span class="talent-tag">UX Research</span>
+        <span class="talent-tag">Content</span>
+      </div>
+    </div>
+    <div class="talent-card reveal reveal-d2">
+      <span class="talent-emoji">📊</span>
+      <div class="talent-title">Business & Strategy</div>
+      <div class="talent-desc">Marketing strategists, finance analysts, operations specialists, and growth hackers from top B-schools and universities.</div>
+      <div class="talent-tags">
+        <span class="talent-tag">Marketing</span>
+        <span class="talent-tag">Strategy</span>
+        <span class="talent-tag">Finance</span>
+        <span class="talent-tag">Operations</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 28px 32px; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;" class="reveal">
+    <div>
+      <div style="font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 6px;">Every person is screened by our team.</div>
+      <div style="font-size: 13px; color: var(--muted); font-weight: 300;">Skills test + 20-min interview + trial project assessment before anyone joins the platform.</div>
+    </div>
+    <a href="#post-project" class="btn-primary" style="white-space: nowrap;">Post a Project →</a>
+  </div>
+</div>
+</div>
+
+<!-- POST A PROJECT FORM -->
+<div class="form-section-wrap" id="post-project">
+  <div class="form-inner">
+    <div class="form-left">
+      <div class="section-label">Post a Project</div>
+      <div class="form-left-title">Tell us what<br>you need <em>built.</em></div>
+      <p class="form-left-sub">Fill in the brief below. We'll review it and come back to you within 24 hours with a matched talent profile.</p>
+
+      <div class="form-promise">
+        <div class="promise-item">
+          <div class="promise-icon">⚡</div>
+          <div class="promise-text"><strong>24-hour response.</strong> We review every brief personally and respond fast.</div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-icon">🎯</div>
+          <div class="promise-text"><strong>Handpicked match.</strong> Not an algorithm — our team selects the right person for your project.</div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-icon">🔒</div>
+          <div class="promise-text"><strong>Escrow payments.</strong> Money moves only when you approve the deliverables.</div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-icon">🛡️</div>
+          <div class="promise-text"><strong>Managed execution.</strong> We handle coordination, check-ins, and quality — not you.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <!-- PROGRESS -->
+      <div class="form-progress" id="formProgress">
+        <div class="progress-step active" id="fp1">
+          <div class="progress-dot">1</div>
+          <span class="progress-label">Project</span>
+        </div>
+        <div class="progress-step" id="fp2">
+          <div class="progress-dot">2</div>
+          <span class="progress-label">Scope</span>
+        </div>
+        <div class="progress-step" id="fp3">
+          <div class="progress-dot">3</div>
+          <span class="progress-label">You</span>
+        </div>
+      </div>
+
+      <!-- STEP 1: Project Info -->
+      <div class="form-step active" id="fstep1">
+        <div class="form-group">
+          <label>Project Title</label>
+          <input type="text" id="proj-title" placeholder="e.g. Build a landing page for our SaaS product" />
+        </div>
+        <div class="form-group">
+          <label>Project Description</label>
+          <textarea id="proj-desc" rows="4" placeholder="Describe what needs to be done, the context, and what success looks like..."></textarea>
+        </div>
+        <div class="form-row">
+          <div class="form-group half">
+            <label>Domain / Category</label>
+            <select id="proj-domain">
+              <option value="" disabled selected>Select domain</option>
+              <option>Web Development</option>
+              <option>Mobile Dev (iOS / Android)</option>
+              <option>AI / Machine Learning</option>
+              <option>DevOps / Cloud</option>
+              <option>Cybersecurity</option>
+              <option>Product Design / UI-UX</option>
+              <option>UI Research / UX Writing</option>
+              <option>Marketing & Growth</option>
+              <option>Content & Copywriting</option>
+              <option>Sales / Business Development</option>
+              <option>Business Strategy</option>
+              <option>Finance & Accounting</option>
+              <option>Data & Analytics</option>
+              <option>Operations</option>
+              <option>HR & Talent</option>
+              <option>Legal</option>
+            </select>
+          </div>
+          <div class="form-group half">
+            <label>Stage of Startup</label>
+            <select id="proj-stage">
+              <option value="" disabled selected>Select stage</option>
+              <option>Idea / Pre-product</option>
+              <option>MVP / Early Traction</option>
+              <option>Seed Funded</option>
+              <option>Series A+</option>
+              <option>Bootstrapped</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-nav">
+          <button class="btn-next" onclick="goToFStep(2)">Continue → Scope</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Scope -->
+      <div class="form-step" id="fstep2">
+        <div class="form-group">
+          <label>Budget (Rs)</label>
+          <input type="number" id="proj-budget" placeholder="e.g. 25000" min="0" />
+        </div>
+        <div class="form-group">
+          <label>Timeline / Duration</label>
+          <select id="proj-timeline">
+            <option value="" disabled selected>Select timeline</option>
+            <option>10 days</option>
+            <option>15 days</option>
+            <option>1 month</option>
+            <option>2 months</option>
+            <option>3 months</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Key Deliverables</label>
+          <textarea id="proj-deliverables" rows="3" placeholder="e.g. Fully functional landing page, 3 design variants, mobile-responsive, integrated with Webflow..."></textarea>
+        </div>
+        <div class="form-nav">
+          <button class="btn-back" onclick="goToFStep(1)">← Back</button>
+          <button class="btn-next" onclick="goToFStep(3)">Continue → Your Details</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Founder Info -->
+      <div class="form-step" id="fstep3">
+        <div class="form-row">
+          <div class="form-group half">
+            <label>Your Name</label>
+            <input type="text" id="founder-name" placeholder="Rahul Sharma" />
+          </div>
+          <div class="form-group half">
+            <label>Company Name</label>
+            <input type="text" id="founder-company" placeholder="YourStartup Inc." />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Work Email</label>
+          <input type="email" id="founder-email" placeholder="rahul@yourstartup.com" />
+        </div>
+        <div class="form-group">
+          <label>WhatsApp / Contact Number</label>
+          <input type="tel" id="founder-phone" placeholder="+91 98765 43210" />
+        </div>
+        <div class="form-nav">
+          <button class="btn-back" onclick="goToFStep(2)">← Back</button>
+          <button class="btn-submit" onclick="handleFounderSubmit()">Submit Brief →</button>
+        </div>
+        <div class="form-note">We'll review your brief and reach out within 24 hours.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="border-top: 1px solid var(--border); position: relative; z-index: 1;">
+<footer>
+  <div class="footer-logo">Hustle<span>Up</span></div>
+  <div style="display:flex; gap: 32px; align-items: center;">
+    <a href="/" style="font-size:12px; color: var(--muted); text-decoration:none;">For Talent</a>
+    <a href="/founders.html" style="font-size:12px; color: var(--muted); text-decoration:none;">For Founders</a>
+  </div>
+  <div class="footer-note">© 2024 HustleUp. Managed talent for startups.</div>
+</footer>
+</div>
+
+<!-- SUCCESS -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-card">
+    <div class="success-icon">✓</div>
+    <div class="success-title">Brief Received</div>
+    <div class="success-sub">We'll review your project and reach out within 24 hours with a matched talent profile. Check your email and WhatsApp.</div>
+    <div style="margin-top: 24px;">
+      <a href="/" style="font-size:13px; color: var(--accent); text-decoration:none;">← Back to HustleUp</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── FORM NAVIGATION ──────────────────────────────────────
+  let currentFStep = 1;
+
+  function goToFStep(n) {
+    document.getElementById('fstep' + currentFStep).classList.remove('active');
+    document.getElementById('fstep' + n).classList.add('active');
+    for (let i = 1; i <= 3; i++) {
+      const fp = document.getElementById('fp' + i);
+      fp.classList.remove('active', 'done');
+      if (i < n) fp.classList.add('done');
+      if (i === n) fp.classList.add('active');
+    }
+    currentFStep = n;
+    document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  // ── AIRTABLE CONFIG ──────────────────────────────────────
+  const AIRTABLE_TOKEN   = 'pat08VGTZuhCpwRmj.19a3db71c8737387ad2931fc69fa967d2c2e9aeba5200106a4b95bcc34663144';
+  const AIRTABLE_BASE_ID = 'app7PCQNS5sjSwYuo';
+  const AIRTABLE_TABLE   = 'Projects';
+
+  // ── SUBMIT ───────────────────────────────────────────────
+  async function handleFounderSubmit() {
+    const title       = document.getElementById('proj-title').value.trim();
+    const desc        = document.getElementById('proj-desc').value.trim();
+    const domain      = document.getElementById('proj-domain').value;
+    const stage       = document.getElementById('proj-stage').value;
+    const budget      = document.getElementById('proj-budget').value.trim();
+    const timeline    = document.getElementById('proj-timeline').value;
+    const deliverables= document.getElementById('proj-deliverables').value.trim();
+    const name        = document.getElementById('founder-name').value.trim();
+    const company     = document.getElementById('founder-company').value.trim();
+    const email       = document.getElementById('founder-email').value.trim();
+    const phone       = document.getElementById('founder-phone').value.trim();
+
+    if (!name || !email || !phone || !title) {
+      const btn = document.querySelector('.btn-submit');
+      btn.style.transform = 'translateX(-6px)';
+      setTimeout(() => btn.style.transform = 'translateX(6px)', 80);
+      setTimeout(() => btn.style.transform = 'translateX(-4px)', 160);
+      setTimeout(() => btn.style.transform = 'translateX(0)', 240);
+      return;
+    }
+
+    const btn = document.querySelector('.btn-submit');
+    btn.textContent = 'Submitting…';
+    btn.style.opacity = '0.7';
+    btn.style.pointerEvents = 'none';
+
+    const payload = {
+      fields: {
+        'Project Title':   title,
+        'Description':     desc,
+        'Domain':          domain,
+        'Startup Stage':   stage,
+        'Budget':          budget,
+        'Timeline':        timeline,
+        'Team Size':       headcount,
+        'Deliverables':    deliverables,
+        'Founder Name':    name,
+        'Company':         company,
+        'Email':           email,
+        'Phone':           phone,
+        'Status':          'New'
+      }
+    };
+
+    Object.keys(payload.fields).forEach(k => {
+      if (payload.fields[k] === undefined || payload.fields[k] === '') {
+        delete payload.fields[k];
+      }
+    });
+
+    try {
+      const response = await fetch(`https://api.airtable.com/v0/${AIRTABLE_BASE_ID}/${encodeURIComponent(AIRTABLE_TABLE)}`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error?.message || JSON.stringify(data));
+
+      document.getElementById('successOverlay').classList.add('show');
+
+    } catch (err) {
+      console.error('Submit error:', err);
+      btn.textContent = 'Something went wrong — try again';
+      btn.style.opacity = '1';
+      btn.style.pointerEvents = 'auto';
+      btn.style.background = 'rgba(255,80,80,0.15)';
+      btn.style.color = '#ff6b6b';
+      btn.style.border = '1px solid rgba(255,80,80,0.3)';
+    }
+  }
+
+  // ── SCROLL REVEALS ────────────────────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
