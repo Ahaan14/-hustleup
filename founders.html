@@ -1328,7 +1328,7 @@
     const desc        = document.getElementById('proj-desc').value.trim();
     const domain      = document.getElementById('proj-domain').value;
     const stage       = document.getElementById('proj-stage').value;
-    const budget      = document.getElementById('proj-budget').value.trim();
+    const budget = parseFloat(document.getElementById('proj-budget').value);
     const timeline    = document.getElementById('proj-timeline').value;
     const deliverables= document.getElementById('proj-deliverables').value.trim();
     const name        = document.getElementById('founder-name').value.trim();
